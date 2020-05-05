@@ -1,5 +1,8 @@
 {
-  "name": "istanbul-reports",
+  "name": "@hypnosphi/istanbul-reports",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "3.0.2",
   "description": "istanbul reports",
   "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
