@@ -3,7 +3,6 @@
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 'use strict';
-const path = require('path');
 const { ReportBase } = require('istanbul-lib-report');
 
 class JsonReport extends ReportBase {
@@ -13,6 +12,7 @@ class JsonReport extends ReportBase {
         this.file = opts.file || 'coverage-final.json';
         this.first = true;
         this.projectRoot = opts.projectRoot;
+        this.skipCommonParent = opts.skipCommonParent;
     }
 
     onStart(root, context) {
@@ -22,8 +22,8 @@ class JsonReport extends ReportBase {
 
     onDetail(node) {
         let fc = node.getFileCoverage();
-        if (this.projectRoot != null) {
-            const relativePath = path.relative(this.projectRoot, fc.path);
+        if (this.skipCommonParent) {
+            const relativePath = node.path.toString();
             fc = {
                 ...fc,
                 path: relativePath,
